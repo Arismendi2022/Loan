@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			let strlistDepto = document.querySelector('#listDepto').value;
 			let strlistMcpio = document.querySelector('#listMcpio').value;
 			let strlistOcup = document.querySelector('#listOcup').value;
-			let strDirFiscal = document.querySelector('#dirFiscal').value;
+			let strDirFiscal = document.querySelector('#txtDirFiscal').value;
 
 			if (strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '' || strlistDepto == '' || strlistMcpio == ''
 				|| strlistOcup == '' || strDirFiscal == '') {
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			let formData = new FormData(formCliente);
 			request.open("POST", ajaxUrl, true);
 			request.send(formData);
-			/*request.onreadystatechange = function () {
+			request.onreadystatechange = function () {
 				if (request.readyState == 4 && request.status == 200) {
 					let objData = JSON.parse(request.responseText);
 					if (objData.status) {
@@ -40,12 +40,13 @@ document.addEventListener('DOMContentLoaded', function () {
 						$('#modalFormCliente').modal("hide");
 						formCliente.reset();
 						alerta("Usuarios", objData.msg, "success");
+						//tableClientes.api().ajax.reload();
 					} else {
 						alerta("Error", objData.msg, "error");
 					}
 				}
 				return false;
-			}*/
+			}
 		}
 	}
 

@@ -29,7 +29,7 @@
 			if ($_POST) {
 				if (empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono'])
 					|| empty($_POST['txtEmail']) || empty($_POST['listDepto']) || empty($_POST['listMcpio']) || empty($_POST['listOcup'])
-					|| empty($_POST['dirFiscal'])) {
+					|| empty($_POST['txtDirFiscal'])) {
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				} else {
 					$idUsuario = intval($_POST['idUsuario']);
@@ -42,7 +42,7 @@
 					$intlistMcpio = intval(strClean($_POST['listMcpio']));
 					$intlistMcpio = intval(strClean($_POST['listMcpio']));
 					$intlistOcup = intval(strClean($_POST['listOcup']));
-					$strdirFiscal = intval(strClean($_POST['dirFiscal']));
+					$strDirFiscal = strClean($_POST['txtDirFiscal']);
 					
 					$request_user = "";
 					
@@ -57,7 +57,7 @@
 								$intlistDepto ,
 								$intlistMcpio,
 								$intlistOcup,
-								$strdirFiscal);
+								$strDirFiscal);
 						}
 					} else {
 						/*$option = 2;
@@ -92,7 +92,8 @@
 			die();
 		}
 		
-		// * Selecionamos Departamentos
+		// * Selecionamos Departamentosexit
+		
 		public function getSelectDepto()
 		{
 			$htmlOptions = "";

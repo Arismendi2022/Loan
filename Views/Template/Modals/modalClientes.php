@@ -69,7 +69,7 @@
 							
 							<div class="form-group col-md-12">
 								<label>Dirección <span class="required">*</span></label>
-								<input class="form-control" type="text" id="dirFiscal" name="dirFiscal" required="">
+								<input class="form-control" type="text" id="txtDirFiscal" name="txtDirFiscal" required="">
 							</div>
 						
 						</div>
