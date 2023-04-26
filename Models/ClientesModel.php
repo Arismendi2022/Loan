@@ -17,6 +17,25 @@
 		{
 			parent::__construct();
 		}
+		
+		// * Departamentos
+		public function selectDepto()
+		{
+			// * EXTRAE DEPARTAMENTOS
+			$sql = "SELECT * FROM departamentos ORDER BY nombre ";
+			$request = $this->select_all($sql);
+			return $request;
+		}
+		// * Ciudades
+		public function selectMcpio(int $idDepto)
+		{
+			// * EXTRAE CIUDAD
+			$this->intIdDepto = $idDepto;
+			$sql = "SELECT * FROM municipios WHERE departamentoid = $this->intIdDepto";
+			$request = $this->select_all($sql);
+			return $request;
+		}
+		
 		// * Insertamos clientes a mysql
 		public function insertCliente(string $identificacion, string $nombre, string $apellido, int $telefono, string $email, int  $departamento, int
 		$municipio, int $ocupacion, string $dirFiscal){
@@ -57,22 +76,12 @@
 			return $return;
 		}
 		
-		
-		// * Departamentos
-		public function selectDepto()
+		// * selecciona clientes
+		public function selectClientes()
 		{
-			
-			// * EXTRAE DEPARTAMENTOS
-			$sql = "SELECT * FROM departamentos ORDER BY nombre ";
-			$request = $this->select_all($sql);
-			return $request;
-		}
-		// * Ciudades
-		public function selectMcpio(int $idDepto)
-		{
-			// * EXTRAE CIUDAD
-			$this->intIdDepto = $idDepto;
-			$sql = "SELECT * FROM municipios WHERE departamentoid = $this->intIdDepto";
+			$sql = "SELECT idcliente,identificacion,nombres,apellidos,telefono,correo,estado
+				FROM clientes
+				WHERE estado != 0 ";
 			$request = $this->select_all($sql);
 			return $request;
 		}

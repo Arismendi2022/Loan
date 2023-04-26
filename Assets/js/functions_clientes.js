@@ -1,6 +1,57 @@
-document.addEventListener('DOMContentLoaded', function () {
+let tableClientes;
+let rowTable = "";
+document.addEventListener('DOMContentLoaded', function(){
 
-	if (document.querySelector("#formCliente")) {
+	tableClientes = $('#tableClientes').dataTable( {
+		"aProcessing":true,
+		"aServerSide":true,
+		"language": {
+			url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+		},
+		"ajax":{
+			"url": " "+base_url+"/Clientes/getClientes",
+			"dataSrc":""
+		},
+		"columns":[
+			{"data":"idcliente"},
+			{"data":"identificacion"},
+			{"data":"nombres"},
+			{"data":"apellidos"},
+			{"data":"correo"},
+			{"data":"telefono"},
+			{"data":"options"}
+		],
+		'dom': 'lBfrtip',
+		'buttons': [
+			{
+				"extend": "copyHtml5",
+				"text": "<i class='far fa-copy'></i> Copiar",
+				"titleAttr":"Copiar",
+				"className": "btn btn-secondary"
+			},{
+				"extend": "excelHtml5",
+				"text": "<i class='fas fa-file-excel'></i> Excel",
+				"titleAttr":"Esportar a Excel",
+				"className": "btn btn-success"
+			},{
+				"extend": "pdfHtml5",
+				"text": "<i class='fas fa-file-pdf'></i> PDF",
+				"titleAttr":"Esportar a PDF",
+				"className": "btn btn-danger"
+			},{
+				"extend": "csvHtml5",
+				"text": "<i class='fas fa-file-csv'></i> CSV",
+				"titleAttr":"Esportar a CSV",
+				"className": "btn btn-info"
+			}
+		],
+		"resonsieve":"true",
+		"bDestroy": true,
+		"iDisplayLength": 10,
+		"order":[[0,"desc"]]
+	});
+
+	if(document.querySelector("#formCliente")) {
 		let formCliente = document.querySelector("#formCliente");
 		formCliente.onsubmit = function (e) {
 			e.preventDefault();
@@ -40,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						$('#modalFormCliente').modal("hide");
 						formCliente.reset();
 						alerta("Usuarios", objData.msg, "success");
-						//tableClientes.api().ajax.reload();
+						tableClientes.api().ajax.reload();
 					} else {
 						alerta("Error", objData.msg, "error");
 					}
@@ -50,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-}, false);
+	}, false);
 
 window.addEventListener('load', function () {
 	fntDepartamentos();
