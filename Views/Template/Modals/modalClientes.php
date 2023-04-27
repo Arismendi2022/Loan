@@ -118,20 +118,20 @@
 						<td id="celTelefono">Larry</td>
 					</tr>
 					<tr>
-						<td>Email (Usuario):</td>
+						<td>Email (Cliente):</td>
 						<td id="celEmail">Larry</td>
 					</tr>
 					<tr>
-						<td>Identificación Tributaria:</td>
-						<td id="celIde">Larry</td>
+						<td>Ciudad:</td>
+						<td id="celNomCiudad">Madrid</td>
 					</tr>
 					<tr>
-						<td>Nombre Fiscal:</td>
-						<td id="celNomFiscal">Larry</td>
-					</tr>
-					<tr>
-						<td>Dirección Fiscal:</td>
+						<td>Dirección:</td>
 						<td id="celDirFiscal">Larry</td>
+					</tr>
+					<tr>
+						<td>Ocupación:</td>
+						<td id="celOcupacion">Larry</td>
 					</tr>
 					<tr>
 						<td>Fecha registro:</td>

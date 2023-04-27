@@ -24,6 +24,36 @@
 			$this->views->getView($this, "clientes", $data);
 		}
 		
+		// * Selecionamos Departamentosexit
+		public function getSelectDepto()
+		{
+			$htmlOptions = "";
+			$arrData = $this->model->selectDepto();
+			if (count($arrData) > 0) {
+				for ($i = 0; $i < count($arrData); $i++) {
+					$htmlOptions .= '<option value="' . $arrData[$i]['iddepartamento'] . '">' . $arrData[$i]['nombre'] . '</option>';
+				}
+			}
+			echo $htmlOptions;
+			die();
+		}
+		// * Selecionamos minicipios
+		public function getSelectMcpio($idDepto)
+		{
+			$htmlOptions = "";
+			$intIdDepto = intval(strClean($idDepto));
+			$arrData = $this->model->selectMcpio($intIdDepto);
+			if (count($arrData) > 0) {
+				for ($i = 0; $i < count($arrData); $i++) {
+					$htmlOptions .= '<option value="' . $arrData[$i]['idmunicipio'] . '">' . $arrData[$i]['nombre'] . '</option>';
+				}
+			}
+			echo $htmlOptions;
+			die();
+			
+		}
+		
+		// * Carga clientes
 		public function setCliente()
 		{
 			if ($_POST) {
@@ -116,34 +146,23 @@
 			die();
 		}
 		
-		// * Selecionamos Departamentosexit
-		public function getSelectDepto()
-		{
-			$htmlOptions = "";
-			$arrData = $this->model->selectDepto();
-			if (count($arrData) > 0) {
-				for ($i = 0; $i < count($arrData); $i++) {
-					$htmlOptions .= '<option value="' . $arrData[$i]['iddepartamento'] . '">' . $arrData[$i]['nombre'] . '</option>';
+		public function getCliente(int $idcliente){
+				$idusuario = intval($idcliente);
+				if($idusuario > 0)
+				{
+					$arrData = $this->model->selectCliente($idusuario);
+					if(empty($arrData))
+					{
+						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+					}else{
+						$arrResponse = array('status' => true, 'data' => $arrData);
+					}
+					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
-			}
-			echo $htmlOptions;
+			
 			die();
 		}
 		
-		// * Selecionamos minicipios
-		public function getSelectMcpio($idDepto)
-		{
-			$htmlOptions = "";
-			$intIdDepto = intval(strClean($idDepto));
-			$arrData = $this->model->selectMcpio($intIdDepto);
-			if (count($arrData) > 0) {
-				for ($i = 0; $i < count($arrData); $i++) {
-					$htmlOptions .= '<option value="' . $arrData[$i]['idmunicipio'] . '">' . $arrData[$i]['nombre'] . '</option>';
-				}
-			}
-			echo $htmlOptions;
-			die();
-			
-		}
+		
 	}
 	// * fin archivo clientes.php

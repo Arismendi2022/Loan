@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			{"data":"apellidos"},
 			{"data":"correo"},
 			{"data":"telefono"},
+			{"data":"nombre"},
 			{"data":"options"}
 		],
 		'dom': 'lBfrtip',
@@ -141,6 +142,34 @@ function fntMunicipios() {
 		});
 	})
 
+}
+
+// * ver información de clientes
+function fntViewInfo(idcliente){
+	let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+	let ajaxUrl = base_url+'/Clientes/getCliente/'+idcliente;
+	request.open("GET",ajaxUrl,true);
+	request.send();
+	request.onreadystatechange = function(){
+		if(request.readyState == 4 && request.status == 200){
+			let objData = JSON.parse(request.responseText);
+			if(objData.status)
+			{
+				document.querySelector("#celIdentificacion").innerHTML = objData.data.identificacion;
+				document.querySelector("#celNombre").innerHTML = objData.data.nombres;
+				document.querySelector("#celApellido").innerHTML = objData.data.apellidos;
+				document.querySelector("#celTelefono").innerHTML = objData.data.telefono;
+				document.querySelector("#celEmail").innerHTML = objData.data.correo;
+				document.querySelector("#celNomCiudad").innerHTML = objData.data.nombre;
+				document.querySelector("#celDirFiscal").innerHTML = objData.data.direccion;
+				document.querySelector("#celOcupacion").innerHTML = objData.data.ocupacion;
+				document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro;
+				$('#modalViewCliente').modal('show');
+			}else{
+				alerta("Error", objData.msg , "error");
+			}
+		}
+	}
 }
 
 function openModal() {

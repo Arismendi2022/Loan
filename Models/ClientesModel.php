@@ -79,10 +79,21 @@
 		// * selecciona clientes
 		public function selectClientes()
 		{
-			$sql = "SELECT idcliente,identificacion,nombres,apellidos,telefono,correo,estado
-				FROM clientes
-				WHERE estado != 0 ";
+			$sql = "SELECT c.idcliente,c.identificacion,c.nombres,c.apellidos,c.telefono,c.correo,m.nombre,c.estado
+				FROM clientes c INNER JOIN municipios m
+				ON c.municipioid = m.idmunicipio
+				WHERE c.estado != 0 ";
 			$request = $this->select_all($sql);
+			return $request;
+		}
+		
+		public function selectCliente(int $idcliente){
+			$this->intIdUsuario= $idcliente;
+			$sql = "SELECT idcliente,identificacion,nombres,apellidos,telefono,correo,m.nombre,ocupacion,direccion,estado, DATE_FORMAT(fechacreado, '%d-%m-%Y') as fechaRegistro
+				FROM clientes INNER JOIN municipios m
+				ON municipioid = m.idmunicipio
+				WHERE idcliente = $this->intIdUsuario";
+			$request = $this->select($sql);
 			return $request;
 		}
 		
