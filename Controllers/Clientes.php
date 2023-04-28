@@ -146,7 +146,7 @@
 			die();
 		}
 		
-		public function getCliente(int $idcliente){
+		public function getCliente($idcliente){
 				$idusuario = intval($idcliente);
 				if($idusuario > 0)
 				{

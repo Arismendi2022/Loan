@@ -1,58 +1,58 @@
 let tableClientes;
 let rowTable = "";
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
 
-	tableClientes = $('#tableClientes').dataTable( {
-		"aProcessing":true,
-		"aServerSide":true,
+	tableClientes = $('#tableClientes').dataTable({
+		"aProcessing": true,
+		"aServerSide": true,
 		"language": {
 			url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
 		},
-		"ajax":{
-			"url": " "+base_url+"/Clientes/getClientes",
-			"dataSrc":""
+		"ajax": {
+			"url": " " + base_url + "/Clientes/getClientes",
+			"dataSrc": ""
 		},
-		"columns":[
-			{"data":"idcliente"},
-			{"data":"identificacion"},
-			{"data":"nombres"},
-			{"data":"apellidos"},
-			{"data":"correo"},
-			{"data":"telefono"},
-			{"data":"nombre"},
-			{"data":"options"}
+		"columns": [
+			{"data": "idcliente"},
+			{"data": "identificacion"},
+			{"data": "nombres"},
+			{"data": "apellidos"},
+			{"data": "correo"},
+			{"data": "telefono"},
+			{"data": "nombre"},
+			{"data": "options"}
 		],
 		'dom': 'lBfrtip',
 		'buttons': [
 			{
 				"extend": "copyHtml5",
 				"text": "<i class='far fa-copy'></i> Copiar",
-				"titleAttr":"Copiar",
+				"titleAttr": "Copiar",
 				"className": "btn btn-secondary"
-			},{
+			}, {
 				"extend": "excelHtml5",
 				"text": "<i class='fas fa-file-excel'></i> Excel",
-				"titleAttr":"Esportar a Excel",
+				"titleAttr": "Esportar a Excel",
 				"className": "btn btn-success"
-			},{
+			}, {
 				"extend": "pdfHtml5",
 				"text": "<i class='fas fa-file-pdf'></i> PDF",
-				"titleAttr":"Esportar a PDF",
+				"titleAttr": "Esportar a PDF",
 				"className": "btn btn-danger"
-			},{
+			}, {
 				"extend": "csvHtml5",
 				"text": "<i class='fas fa-file-csv'></i> CSV",
-				"titleAttr":"Esportar a CSV",
+				"titleAttr": "Esportar a CSV",
 				"className": "btn btn-info"
 			}
 		],
-		"resonsieve":"true",
+		"resonsieve": "true",
 		"bDestroy": true,
 		"iDisplayLength": 10,
-		"order":[[0,"desc"]]
+		"order": [[0, "desc"]]
 	});
 
-	if(document.querySelector("#formCliente")) {
+	if (document.querySelector("#formCliente")) {
 		let formCliente = document.querySelector("#formCliente");
 		formCliente.onsubmit = function (e) {
 			e.preventDefault();
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	}, false);
+}, false);
 
 window.addEventListener('load', function () {
 	fntDepartamentos();
@@ -145,33 +145,88 @@ function fntMunicipios() {
 }
 
 // * ver información de clientes
-function fntViewInfo(idcliente){
+function fntViewInfo(idcliente) {
 	let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-	let ajaxUrl = base_url+'/Clientes/getCliente/'+idcliente;
-	request.open("GET",ajaxUrl,true);
+	let ajaxUrl = base_url + '/Clientes/getCliente/' + idcliente;
+	request.open("GET", ajaxUrl, true);
 	request.send();
-	request.onreadystatechange = function(){
-		if(request.readyState == 4 && request.status == 200){
+	request.onreadystatechange = function () {
+		if (request.readyState == 4 && request.status == 200) {
 			let objData = JSON.parse(request.responseText);
-			if(objData.status)
-			{
+			if (objData.status) {
+				if (objData.status) {
+				}
+				const oficio = objData.data.ocupacion;
+				const ocupCliente = oficio == 1 ? 'Empleado' : oficio == 2 ? 'Estudiante' : oficio == 3 ? 'Pensionado' :
+							oficio == 4 ? 'Independiente' : oficio == 5 ? 'Desempleado' :
+
+				document.querySelector("#idUsuario").value = objData.data.idcliente;
 				document.querySelector("#celIdentificacion").innerHTML = objData.data.identificacion;
 				document.querySelector("#celNombre").innerHTML = objData.data.nombres;
 				document.querySelector("#celApellido").innerHTML = objData.data.apellidos;
 				document.querySelector("#celTelefono").innerHTML = objData.data.telefono;
 				document.querySelector("#celEmail").innerHTML = objData.data.correo;
-				document.querySelector("#celNomCiudad").innerHTML = objData.data.nombre;
+				document.querySelector("#celNomDepto").innerHTML = objData.data.departamento;
+				document.querySelector("#celNomCiudad").innerHTML = objData.data.ciudad;
 				document.querySelector("#celDirFiscal").innerHTML = objData.data.direccion;
-				document.querySelector("#celOcupacion").innerHTML = objData.data.ocupacion;
+				document.querySelector("#celOcupacion").innerHTML = ocupCliente;
 				document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro;
 				$('#modalViewCliente').modal('show');
-			}else{
-				alerta("Error", objData.msg , "error");
+			} else {
+				alerta("Error", objData.msg, "error");
 			}
 		}
 	}
 }
 
+// * editar cliente
+function fntEditInfo(element, idcliente) {
+	document.querySelector('#titleModal').innerHTML = "Actualizar Cliente";
+	document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
+	document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+	document.querySelector('#btnText').innerHTML = "Actualizar"
+
+	let request = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+	let ajaxUrl = base_url + "/Clientes/getCliente/" + idcliente;
+	request.open("GET", ajaxUrl, true);
+	request.send();
+	request.onreadystatechange = function () {
+
+		if (request.readyState == 4 && request.status == 200) {
+			let objData = JSON.parse(request.responseText);
+
+			if (objData.status) {
+				document.querySelector("#idUsuario").value = objData.data.idcliente;
+				document.querySelector("#txtIdentificacion").value = objData.data.identificacion;
+				document.querySelector("#txtNombre").value = objData.data.nombres;
+				document.querySelector("#txtApellido").value = objData.data.apellidos;
+				document.querySelector("#txtTelefono").value = objData.data.telefono;
+				document.querySelector("#txtEmail").value = objData.data.correo;
+				document.querySelector("#listDepto").innerHTML = objData.data.departamento;
+				document.querySelector("#txtDirFiscal").value = objData.data.direccion;
+
+				$('#listStatus').selectpicker('render');
+
+				if (objData.data.ocupacion == 1) {
+					document.querySelector("#listOcup").value = 1;
+				}
+				if (objData.data.ocupacion == 2) {
+					document.querySelector("#listOcup").value = 2;
+				}
+				if (objData.data.ocupacion == 3) {
+					document.querySelector("#listOcup").value = 3;
+				}
+				if (objData.data.ocupacion == 4) {
+					document.querySelector("#listOcup").value = 4;
+				}
+				 $('#listOcup').selectpicker('render');
+			}
+		}
+		$("#modalFormCliente").modal("show");
+	}
+}
+
+// * Modal /clientes
 function openModal() {
 	rowTable = "";
 	document.querySelector('#idUsuario').value = "";

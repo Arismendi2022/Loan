@@ -17,29 +17,26 @@
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="txtIdentificacion">Identificación <span class="required">*</span></label>
-								<input type="text" class="form-control valid validNumber" id="txtIdentificacion" name="txtIdentificacion" required=""
-								       onkeypress="return controlTag(event);">
+								<input type="text" class="form-control valid validNumber" id="txtIdentificacion" name="txtIdentificacion" onkeypress="return controlTag(event);">
 							</div>
 							<div class="form-group col-md-4">
 								<label for="txtNombre">Nombres <span class="required">*</span></label>
-								<input type="text" class="form-control valid validText" id="txtNombre" name="txtNombre" required="">
+								<input type="text" class="form-control valid validText" id="txtNombre" name="txtNombre">
 							</div>
 							<div class="form-group col-md-4">
 								<label for="txtApellido">Apellidos <span class="required">*</span></label>
-								<input type="text" class="form-control valid validText" id="txtApellido" name="txtApellido" required="">
+								<input type="text" class="form-control valid validText" id="txtApellido" name="txtApellido">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="txtTelefono">Teléfono <span class="required">*</span></label>
-								<input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" required=""
-								       onkeypress="return controlTag(event);">
+								<input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" onkeypress="return controlTag(event);">
 							</div>
 							<div class="form-group col-md-6">
 								<label for="txtEmail">Email <span class="required">*</span></label>
-								<input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" required="">
-							</div>
-						</div>
+								<input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail">
+							</div>						</div>
 						<hr>
 						<p class="text-primary">Datos Fiscales.</p>
 						<div class="form-row">
@@ -57,8 +54,8 @@
 							</div>
 							<div class="form-group col-md-4">
 								<label>Ocupación <span class="required">*</span></label>
-								<select class="form-control selectpicker" id="listOcup" name="listOcup" required="">
-									<option value="0"> Ocupación</option>
+								<select class="form-control selectpicker" id="listOcup" name="listOcup">
+								<option value="0"> Ocupación</option>
 									<option value="1">Empleado</option>
 									<option value="2">Estudiante</option>
 									<option value="3">Pensionado</option>
@@ -66,12 +63,10 @@
 									<option value="5">Desempleado</option>
 								</select>
 							</div>
-							
 							<div class="form-group col-md-12">
 								<label>Dirección <span class="required">*</span></label>
-								<input class="form-control" type="text" id="txtDirFiscal" name="txtDirFiscal" required="">
+								<input class="form-control" type="text" id="txtDirFiscal" name="txtDirFiscal">
 							</div>
-						
 						</div>
 						<div class="form-row">
 						
@@ -122,6 +117,10 @@
 						<td id="celEmail">Larry</td>
 					</tr>
 					<tr>
+						<td>Departamento:</td>
+						<td id="celNomDepto">Madrid</td>
+					</tr>
+					<tr>
 						<td>Ciudad:</td>
 						<td id="celNomCiudad">Madrid</td>
 					</tr>
@@ -141,7 +140,7 @@
 				</table>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 			</div>
 		</div>
 	</div>

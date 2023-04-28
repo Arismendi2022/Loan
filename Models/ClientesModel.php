@@ -89,9 +89,9 @@
 		
 		public function selectCliente(int $idcliente){
 			$this->intIdUsuario= $idcliente;
-			$sql = "SELECT idcliente,identificacion,nombres,apellidos,telefono,correo,m.nombre,ocupacion,direccion,estado, DATE_FORMAT(fechacreado, '%d-%m-%Y') as fechaRegistro
-				FROM clientes INNER JOIN municipios m
-				ON municipioid = m.idmunicipio
+			$sql = "SELECT idcliente,identificacion,nombres,apellidos,telefono,correo,d.nombre as departamento,m.nombre as ciudad,ocupacion,direccion,estado, DATE_FORMAT(fechacreado, '%d-%m-%Y') as fechaRegistro
+				FROM clientes INNER JOIN municipios m ON municipioid = m.idmunicipio
+				INNER JOIN departamentos d ON iddepartamento = m.departamentoid
 				WHERE idcliente = $this->intIdUsuario";
 			$request = $this->select($sql);
 			return $request;
