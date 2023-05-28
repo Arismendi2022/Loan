@@ -72,9 +72,8 @@
 					}
 					if ($option == 1) {
 						if ($request_user != 'exist') {
-							
 							$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
-						} elseif ($request_user === 'exist') {
+						} elseif ($request_user == 'exist') {
 							$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');
 						} else {
 							$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
@@ -177,20 +176,20 @@
 			$this->views->getView($this, "perfil", $data);
 		}
 		
-		public function putPerfil(){
-			if($_POST){
-				if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) )
-				{
+		public function putPerfil()
+		{
+			if ($_POST) {
+				if (empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono'])) {
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
-				}else{
+				} else {
 					$idUsuario = $_SESSION['idUser'];
 					$strIdentificacion = strClean($_POST['txtIdentificacion']);
 					$strNombre = strClean($_POST['txtNombre']);
 					$strApellido = strClean($_POST['txtApellido']);
 					$intTelefono = intval(strClean($_POST['txtTelefono']));
 					$strPassword = "";
-					if(!empty($_POST['txtPassword'])){
-						$strPassword = hash("SHA256",$_POST['txtPassword']);
+					if (!empty($_POST['txtPassword'])) {
+						$strPassword = hash("SHA256", $_POST['txtPassword']);
 					}
 					$request_user = $this->model->updatePerfil($idUsuario,
 						$strIdentificacion,
@@ -198,15 +197,14 @@
 						$strApellido,
 						$intTelefono,
 						$strPassword);
-					if($request_user)
-					{
+					if ($request_user) {
 						sessionUser($_SESSION['idUser']);
 						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
-					}else{
+					} else {
 						$arrResponse = array("status" => false, "msg" => 'No es posible actualizar los datos.');
 					}
 				}
-				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
 			}
 			die();
 		}

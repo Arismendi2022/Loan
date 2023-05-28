@@ -9,12 +9,10 @@
 	<meta name="theme-color" content="#009688">
 	<link rel="shortcut icon" href="<?= media(); ?>/images/favicon.ico">
 	<title><?= $data['page_tag'] ?></title>
-	<!-- Main CSS-->
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	
 	<link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/main.css">
 	<link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/bootstrap-select.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/style.css">

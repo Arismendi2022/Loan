@@ -22,7 +22,7 @@
 		public function selectDepto()
 		{
 			// * EXTRAE DEPARTAMENTOS
-			$sql = "SELECT * FROM departamentos ORDER BY nombre ";
+			$sql = "SELECT iddepartamento, departamento FROM departamentos ORDER BY departamento ";
 			$request = $this->select_all($sql);
 			return $request;
 		}
@@ -31,7 +31,7 @@
 		{
 			// * EXTRAE CIUDAD
 			$this->intIdDepto = $idDepto;
-			$sql = "SELECT * FROM municipios WHERE departamentoid = $this->intIdDepto";
+			$sql = "SELECT idmunicipio, municipio FROM municipios WHERE departamentoid = $this->intIdDepto";
 			$request = $this->select_all($sql);
 			return $request;
 		}
@@ -79,7 +79,7 @@
 		// * selecciona clientes
 		public function selectClientes()
 		{
-			$sql = "SELECT c.idcliente,c.identificacion,c.nombres,c.apellidos,c.telefono,c.correo,m.nombre,c.estado
+			$sql = "SELECT c.idcliente,c.identificacion,c.nombres,c.apellidos,c.telefono,c.correo,m.municipio,c.estado
 				FROM clientes c INNER JOIN municipios m
 				ON c.municipioid = m.idmunicipio
 				WHERE c.estado != 0 ";
@@ -89,8 +89,9 @@
 		
 		public function selectCliente(int $idcliente){
 			$this->intIdUsuario= $idcliente;
-			$sql = "SELECT idcliente,identificacion,nombres,apellidos,telefono,correo,d.nombre as departamento,m.nombre as ciudad,ocupacion,direccion,estado, DATE_FORMAT(fechacreado, '%d-%m-%Y') as fechaRegistro
-				FROM clientes INNER JOIN municipios m ON municipioid = m.idmunicipio
+			$sql = "SELECT c.idcliente,c.identificacion,c.nombres,c.apellidos,c.telefono,c.correo,c.departamentoid,d.departamento,c.municipioid,m.municipio,
+       	c.ocupacion,c.direccion,c.estado, DATE_FORMAT(c.fechacreado, '%d-%m-%Y') as fechaRegistro
+				FROM clientes c INNER JOIN municipios m ON municipioid = m.idmunicipio
 				INNER JOIN departamentos d ON iddepartamento = m.departamentoid
 				WHERE idcliente = $this->intIdUsuario";
 			$request = $this->select($sql);

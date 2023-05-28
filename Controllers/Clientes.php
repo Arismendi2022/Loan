@@ -18,7 +18,7 @@
 				header("Location:" . base_url() . '/dashboard');
 			}
 			$data['page_tag'] = "Clientes";
-			$data['page_title'] = "CLIENTES <small> Sistema de Crédito</small>";
+			$data['page_title'] = "Clientes <small> Sistema de Crédito</small>";
 			$data['page_name'] = "clientes";
 			$data['page_functions_js'] = "functions_clientes.js";
 			$this->views->getView($this, "clientes", $data);
@@ -31,7 +31,7 @@
 			$arrData = $this->model->selectDepto();
 			if (count($arrData) > 0) {
 				for ($i = 0; $i < count($arrData); $i++) {
-					$htmlOptions .= '<option value="' . $arrData[$i]['iddepartamento'] . '">' . $arrData[$i]['nombre'] . '</option>';
+					$htmlOptions .= '<option value="' . $arrData[$i]['iddepartamento'] . '">' . $arrData[$i]['departamento'] . '</option>';
 				}
 			}
 			echo $htmlOptions;
@@ -45,7 +45,7 @@
 			$arrData = $this->model->selectMcpio($intIdDepto);
 			if (count($arrData) > 0) {
 				for ($i = 0; $i < count($arrData); $i++) {
-					$htmlOptions .= '<option value="' . $arrData[$i]['idmunicipio'] . '">' . $arrData[$i]['nombre'] . '</option>';
+					$htmlOptions .= '<option value="' . $arrData[$i]['idmunicipio'] . '">' . $arrData[$i]['municipio'] . '</option>';
 				}
 			}
 			echo $htmlOptions;

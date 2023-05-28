@@ -42,20 +42,19 @@
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label>Departamento <span class="required">*</span></label>
-								<select class="form-control" data-live-search="true" title="Seleccione departamento." id="listDepto" name="listDepto">
-									<option value=""> Departamento.</option>
+								<select class="form-control" data-live-search="true" title="Seleccione departamento" id="listDepto" name="listDepto">
+									<option value="0"> Departamento</option>
 								</select>
 							</div>
 							<div class="form-group col-md-4">
 								<label>Ciudad <span class="required">*</span></label>
-								<select class="form-control" data-live-search="true" title="Seleccione ciudad." id="listMcpio" name="listMcpio">
-									<option value=""> Seleccione ciudad.</option>
+								<select class="form-control" data-live-search="true" title="Seleccione ciudad" id="listMcpio" name="listMcpio">
+									<option value=0""> Seleccione ciudad</option>
 								</select>
 							</div>
 							<div class="form-group col-md-4">
 								<label>Ocupación <span class="required">*</span></label>
-								<select class="form-control selectpicker" id="listOcup" name="listOcup">
-								<option value="0"> Ocupación</option>
+								<select class="form-control selectpicker" title="Ocupación" id="listOcup" name="listOcup" onchange="ver()">
 									<option value="1">Empleado</option>
 									<option value="2">Estudiante</option>
 									<option value="3">Pensionado</option>

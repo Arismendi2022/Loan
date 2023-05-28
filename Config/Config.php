@@ -28,3 +28,6 @@ const SMONEY = "$";
 	const MREPORTES = 6;
 	const MCONTABILIDAD = 7;
 	
+	
+	const OCUPACION = array('Empleado','Estudiante','Pensionado','Independiente','Desempleado');
+	
